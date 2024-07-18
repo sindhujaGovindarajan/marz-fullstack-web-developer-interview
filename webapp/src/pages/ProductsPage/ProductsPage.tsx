@@ -30,7 +30,7 @@ const ProductsPage: React.FC = () => {
       ProductName: "Master Showreel",
       ProductPhotoURL:
         "https://i.vimeocdn.com/video/1836529810-e1db005ef64f60d148ce42dd48925cee4c5b5593e987790ae74c040c471d0ae9-d?mw=900&mh=507&q=70",
-      ProductStatus: "Inactive",
+      ProductStatus: "InActive",
     },
   ];
   useEffect(() => {
