@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { HelmetProvider } from "react-helmet-async";
+// import { HelmetProvider } from "react-helmet-async";
 import HomePage from "./pages/HomePage/HomePage";
 import ProductsPage from "./pages/ProductsPage/ProductsPage";
 
 const App = () => (
-  <HelmetProvider>
+  // <HelmetProvider>
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
@@ -16,7 +16,7 @@ const App = () => (
         </Route>
       </Switch>
     </BrowserRouter>
-  </HelmetProvider>
+  // </HelmetProvider>
 );
 
 export default App;

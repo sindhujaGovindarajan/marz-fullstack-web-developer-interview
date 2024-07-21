@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
+// import { Helmet } from "react-helmet-async";
 import { Product } from "../../components/interfaces";
 import { getProductsData } from "../ApiHelper";
 import PageWrapper from "../PageWrapper";
@@ -12,7 +12,7 @@ const DATA_STATES = {
   error: "ERROR",
 };
 
-const ProductsPage: React.FC = () => {
+const ProductsPage = () => {
   /*
     TODO:
       When the drag ends we want to keep the status persistant across logins. 
@@ -55,7 +55,7 @@ const ProductsPage: React.FC = () => {
     content = (
       <div data-testid="products-container">
         <h1 className="text-gray-600 text-xl font-bold mb-2">Products</h1>
-        <div className="flex flex-row items-center justify-between w-full">
+        <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-4 items-center justify-between w-full">
           {activeProducts?.map((activeProduct) => (
             <ProductCard key={activeProduct.ProductID} {...activeProduct} />
           ))}
@@ -74,10 +74,11 @@ const ProductsPage: React.FC = () => {
   return (
     <PageWrapper>
       <div className="container">
-        <Helmet>
+        {/* for SEO  */}
+        {/* <Helmet>
           <title>Monsters Aliens Robots Zombies VFX - Products</title>
           <meta name="description" content="MARZ active products" />
-        </Helmet>
+        </Helmet> */}
         {content}
       </div>
     </PageWrapper>
