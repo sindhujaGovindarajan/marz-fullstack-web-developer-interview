@@ -79,9 +79,13 @@ npm run test
 ### Testing api.orders
 
 To run the pytests from the root directory run the following commands
-
+<!-- 
 ```Bash
-docker compose exec -it api-orders bash
+docker compose exec -it api.orders bash
+python -m pytest tests/ # from within the container
+``` -->
+```Bash
+docker compose exec -it api.orders bash
 python -m pytest tests/ # from within the container
 ```
 

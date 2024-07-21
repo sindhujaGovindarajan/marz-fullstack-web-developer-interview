@@ -3,7 +3,6 @@ from peewee import (
     Model,
     IntegerField,
     CharField,
-    ForeignKeyField,
     Field
 )
 from playhouse.mysql_ext import MariaDBConnectorDatabase
@@ -26,16 +25,7 @@ PRODUCT_STATUSES = {
     'InActive': 'InActive'
 }
 
-ORDER_STATUSES = {
-    'Queued': 'Queued',
-    'InProgress': 'InProgress',
-    'QA': 'QA',
-    'Cancelled': 'Cancelled',
-    'Complete': 'Complete'
-}
-
 PRODUCT_STATUSES_SET = set(PRODUCT_STATUSES.values())
-ORDER_STATUSES_SET = set(ORDER_STATUSES.values())
 
 class EnumField(Field):
     field_type='enum'
@@ -60,14 +50,6 @@ class EnumField(Field):
 class BaseModel(Model):
     class Meta:
         database = db
-
-class Customer(BaseModel):
-    CustomerID = IntegerField(primary_key=True)
-    CustomerFirstName = CharField(100, null=False)
-    CustomerLastName = CharField(100, null=False)
-    
-    class Meta:
-        table_name = 'Customer'
 
 class Product(BaseModel):
     ProductID = IntegerField(primary_key=True)
