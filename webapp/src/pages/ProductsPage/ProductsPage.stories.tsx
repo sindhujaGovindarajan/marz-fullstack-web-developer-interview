@@ -63,9 +63,9 @@ GetDataSuccess.parameters = {
           },
           {
             ProductID: 511,
-            ProductName: "Coat",
+            ProductName: "Travel pillow",
             ProductPhotoURL:
-              "https://cdn-icons-png.flaticon.com/512/10142/10142710.png",
+              "https://cdn-icons-png.flaticon.com/512/10142/10142711.png",
             ProductStatus: "Active",
           },
           {
@@ -77,9 +77,8 @@ GetDataSuccess.parameters = {
           },
           {
             ProductID: 51,
-            ProductName: "Coat",
-            ProductPhotoURL:
-              "https://cdn-icons-png.flaticon.com/512/10142/10142710.png",
+            ProductName: "Handbag",
+            ProductPhotoURL: "",
             ProductStatus: "Active",
           },
         ],

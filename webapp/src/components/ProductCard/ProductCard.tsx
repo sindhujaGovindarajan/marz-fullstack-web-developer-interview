@@ -9,7 +9,10 @@ const ProductCard: React.FC<Product> = (props) => {
     >
       <img
         className="w-9/12 mx-auto my-0"
-        src={props.ProductPhotoURL}
+        src={
+          props.ProductPhotoURL ||
+          "https://cdn-icons-png.flaticon.com/512/13434/13434972.png"
+        }
         alt={props.ProductName}
       />
       <div className="px-6 py-4">
