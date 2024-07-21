@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { Product } from "../../components/interfaces";
+import { getProductsData } from "../ApiHelper";
 import PageWrapper from "../PageWrapper";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import Spinner from "../../components/Spinner/Spinner";
 
-interface ActiveProduct {
-  ProductID: number;
-  ProductName: string;
-  ProductPhotoURL: string;
-}
+const DATA_STATES = {
+  waiting: "WAITING",
+  loaded: "LOADED",
+  error: "ERROR",
+};
 
 const ProductsPage: React.FC = () => {
   /*
@@ -16,47 +19,66 @@ const ProductsPage: React.FC = () => {
       Instead of modifying the data locally we want to do it serverside via a post
       request
   */
-  const [activeProducts, setActiveProducts] = useState<ActiveProduct[]>([]);
-  const products = [
-    {
-      ProductID: 1,
-      ProductName: "Ant-Man and the Wasp: Quantumania (Marvel Studios)",
-      ProductPhotoURL:
-        "https://i.vimeocdn.com/video/1625345672-870e3bd5cf157f98e03717b654878072d7b573d07d5319d07bf504ea1b97e6c8-d?mw=900&mh=507&q=70",
-      ProductStatus: "Active",
-    },
-    {
-      ProductID: 2,
-      ProductName: "Master Showreel",
-      ProductPhotoURL:
-        "https://i.vimeocdn.com/video/1836529810-e1db005ef64f60d148ce42dd48925cee4c5b5593e987790ae74c040c471d0ae9-d?mw=900&mh=507&q=70",
-      ProductStatus: "InActive",
-    },
-  ];
-  useEffect(() => {
-    setActiveProducts(
-      products.filter(({ ProductStatus }) => ProductStatus === "Active")
-    );
-  }, []);
+  const [loadingState, setLoadingState] = useState(DATA_STATES.waiting);
+  const [products, setProducts] = useState([] as Product[]);
+  const [activeProducts, setActiveProducts] = useState<Product[]>([]);
 
+  const getProducts = async () => {
+    setLoadingState(DATA_STATES.waiting);
+    const { productsData, errorOccured } = await getProductsData();
+    setProducts(productsData);
+    setLoadingState(errorOccured ? DATA_STATES.error : DATA_STATES.loaded);
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+  useEffect(() => {
+    if (products.length) {
+      setActiveProducts(
+        products.filter(({ ProductStatus }) => ProductStatus === "Active")
+      );
+    }
+  }, [products]);
+
+  let content;
+  if (loadingState === DATA_STATES.waiting)
+    content = (
+      <div
+        className="flex flex-row justify-center w-full pt-4"
+        data-testid="loading-spinner-container"
+      >
+        <Spinner />
+      </div>
+    );
+  else if (loadingState === DATA_STATES.loaded)
+    content = (
+      <div data-testid="products-container">
+        <h1 className="text-gray-600 text-xl font-bold mb-2">Products</h1>
+        <div className="flex flex-row items-center justify-between w-full">
+          {activeProducts?.map((activeProduct) => (
+            <ProductCard key={activeProduct.ProductID} {...activeProduct} />
+          ))}
+        </div>
+      </div>
+    );
+  else
+    content = (
+      <div
+        className="flex flex-row justify-center w-full pt-4 text-3xl font-bold text-white"
+        data-testid="error-container"
+      >
+        An error occured fetching the data!
+      </div>
+    );
   return (
     <PageWrapper>
-      <div className="container mx-auto px-4">
+      <div className="container">
         <Helmet>
           <title>Monsters Aliens Robots Zombies VFX - Products</title>
           <meta name="description" content="MARZ active products" />
         </Helmet>
-        <h1 className="text-2xl font-bold mb-4">Products</h1>
-        <div className="grid grid-cols-3 gap-4">
-          {activeProducts?.map((activeProduct) => (
-            <ProductCard
-              key={activeProduct.ProductID}
-              id={activeProduct.ProductID}
-              name={activeProduct.ProductName}
-              imageUrl={activeProduct.ProductPhotoURL}
-            />
-          ))}
-        </div>
+        {content}
       </div>
     </PageWrapper>
   );
