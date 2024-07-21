@@ -2,6 +2,10 @@ import React from "react";
 import { Product } from "../interfaces";
 
 const ProductCard: React.FC<Product> = (props) => {
+  const productImage =
+    props.ProductPhotoURL ||
+    "https://cdn-icons-png.flaticon.com/512/13434/13434972.png";
+
   return (
     <div
       className="bg-slate-700 max-w-sm rounded overflow-hidden"
@@ -9,10 +13,7 @@ const ProductCard: React.FC<Product> = (props) => {
     >
       <img
         className="w-9/12 mx-auto my-0"
-        src={
-          props.ProductPhotoURL ||
-          "https://cdn-icons-png.flaticon.com/512/13434/13434972.png"
-        }
+        src={productImage}
         alt={props.ProductName}
       />
       <div className="px-6 py-4">
