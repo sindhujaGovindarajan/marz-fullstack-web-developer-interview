@@ -92,7 +92,7 @@ CREATE TABLE `Product` (
 
 LOCK TABLES `Product` WRITE;
 /*!40000 ALTER TABLE `Product` DISABLE KEYS */;
-INSERT INTO `Product` VALUES (1,'Hat','t','Active'),(2,'Shoes','t','Active'),(3,'Pants','t','Active'),(4,'Shirt','t','InActive'),(5,'Coat','t','InActive');
+INSERT INTO `Product` VALUES (1,'Hat','https://cdn-icons-png.flaticon.com/512/6347/6347666.png','Active'),(2,'Shoes','https://cdn-icons-png.flaticon.com/512/8360/8360022.png','Active'),(3,'Pants','https://cdn-icons-png.flaticon.com/512/8359/8359965.png','Active'),(4,'Shirt','https://cdn-icons-png.flaticon.com/512/16835/16835561.png','InActive'),(5,'Coat','https://cdn-icons-png.flaticon.com/512/10142/10142710.png','InActive');
 /*!40000 ALTER TABLE `Product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
