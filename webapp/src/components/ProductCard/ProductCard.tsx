@@ -15,9 +15,13 @@ const ProductCard: React.FC<Product> = (props) => {
         className="w-9/12 mx-auto my-0"
         src={productImage}
         alt={props.ProductName}
+        data-testid={`product-image-${props.ProductID}`}
       />
       <div className="px-6 py-4">
-        <div className="text-gray-100 font-bold text-xl mb-2">
+        <div
+          className="text-gray-100 font-bold text-xl mb-2"
+          data-testid={`product-name-${props.ProductID}`}
+        >
           {props.ProductName}
         </div>
         <p className="text-gray-200 text-base">

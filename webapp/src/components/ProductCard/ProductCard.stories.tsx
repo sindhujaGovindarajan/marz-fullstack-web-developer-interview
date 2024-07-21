@@ -1,6 +1,4 @@
-import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { DragDropContext } from "react-beautiful-dnd";
 import ProductCard from "./ProductCard";
 
 export default {
